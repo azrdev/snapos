@@ -23,6 +23,7 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}
+          FEED_DIR: "$GITHUB_WORKSPACE/openwrt/"
           PACKAGES: Snapclient
 
       - name: Store packages
