@@ -99,7 +99,7 @@ define Package/snapserver/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/snapserver.init $(1)/etc/init.d/snapserver
 	$(INSTALL_DIR) $(1)/etc/default
-	$(INSTALL_BIN) $(CURDIR)/../../debian/snapserver.default $(1)/etc/default/snapserver
+	$(INSTALL_BIN) ./extras/package/debian/snapserver.default $(1)/etc/default/snapserver
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/server/etc/snapserver.conf $(1)/etc/snapserver.conf
 endef
 
@@ -109,7 +109,7 @@ define Package/snapclient/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/snapclient.init $(1)/etc/init.d/snapclient
 	$(INSTALL_DIR) $(1)/etc/default
-	$(INSTALL_BIN) $(CURDIR)/../../debian/snapclient.default $(1)/etc/default/snapclient
+	$(INSTALL_BIN) ./extras/package/debian/snapclient.default $(1)/etc/default/snapclient
 endef
 
 $(eval $(call BuildPackage,snapserver))
