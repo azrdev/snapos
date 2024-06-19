@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME := snapcast
+PKG_NAME := snapclient
 PKG_VERSION := 0.28.0
 PKG_RELEASE := $(PKG_SOURCE_VERSION)
 PKG_USE_MIPS16 := 0
@@ -36,36 +36,16 @@ define Package/snapcast/description/Default
 	Synchronous audio player
 endef
 
-define Package/snapserver
-	$(call Package/snapcast/Default)
-	TITLE += Snapserver
-	DEPENDS += +AUDIO_SUPPORT:alsa-lib +libvorbis +libsoxr
-endef
-
 define Package/snapclient
 	$(call Package/snapcast/Default)
 	TILE += Snapclient
 	DEPENDS += +libvorbisidec +libsoxr
-endef
-
-define Package/snapserver/description
-	$(call Package/snapcast/description/Default)
-	Snapcast server
+	DEFAULT := y
 endef
 
 define Package/snapclient/description
 	$(call Package/snapcast/description/Default)
 	Snapcast client
-endef
-
-define Package/snapserver/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/snapserver $(1)/usr/bin/
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/snapserver.init $(1)/etc/init.d/snapserver
-	$(INSTALL_DIR) $(1)/etc/default
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/extras/package/debian/snapserver.default $(1)/etc/default/snapserver
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/server/etc/snapserver.conf $(1)/etc/snapserver.conf
 endef
 
 define Package/snapclient/install
@@ -77,5 +57,5 @@ define Package/snapclient/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/extras/package/debian/snapclient.default $(1)/etc/default/snapclient
 endef
 
-$(eval $(call BuildPackage,snapserver))
 $(eval $(call BuildPackage,snapclient))
+

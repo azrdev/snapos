@@ -24,7 +24,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
           FEED_DIR: "$GITHUB_WORKSPACE/openwrt/"
-          PACKAGES: snapclient snapserver
+          PACKAGES: snapclient
           V: sc  # verbosity, see https://openwrt.org/docs/techref/buildroot#warnings_errors_and_tracing
           # avoid bug in git diff invocation
           NO_REFRESH_CHECK: 1
