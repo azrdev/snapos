@@ -36,30 +36,16 @@ define Package/snapcast/description/Default
 	Synchronous audio player
 endef
 
-define Package/snapcast
-	$(call Package/snapcast/Default)
-	TITLE += packages
-endef
-
-define Package/snapcast/description
-	$(call Package/snapcast/description/Default)
-	Snapcast is a multi-room client-server audio player, 
-	where all clients are time synchronized with the server 
-	to play perfectly synced audio
-endef
-
 define Package/snapserver
 	$(call Package/snapcast/Default)
 	TITLE += Snapserver
 	DEPENDS += +AUDIO_SUPPORT:alsa-lib +libvorbis +libsoxr
-	HIDDEN := 1
 endef
 
 define Package/snapclient
 	$(call Package/snapcast/Default)
 	TILE += Snapclient
 	DEPENDS += +libvorbisidec +libsoxr
-	HIDDEN := 1
 endef
 
 define Package/snapserver/description
@@ -70,28 +56,6 @@ endef
 define Package/snapclient/description
 	$(call Package/snapcast/description/Default)
 	Snapcast client
-endef
-
-define Package/snapcast/config
- 	menu "Select Snapcast Options"
-		depends on PACKAGE_snapcast
-		comment "Choose server or client"
-		config PACKAGE_snapserver
-			prompt "Snapserver"
-			help
-				Snapcast server
-			default n
-
-		config PACKAGE_snapclient
-			prompt "Snapclient"
-			help
-				Snapcast client
-			default y
-	endmenu
-endef
-
-define Package/snapcast/Default/install
-	true
 endef
 
 define Package/snapserver/install
@@ -115,4 +79,3 @@ endef
 
 $(eval $(call BuildPackage,snapserver))
 $(eval $(call BuildPackage,snapclient))
-$(eval $(call BuildPackage,snapcast))
