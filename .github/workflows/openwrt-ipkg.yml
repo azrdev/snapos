@@ -26,6 +26,9 @@ jobs:
           FEED_DIR: "$GITHUB_WORKSPACE/openwrt/"
           PACKAGES: snapcast snapclient snapserver
           V: sc  # verbosity, see https://openwrt.org/docs/techref/buildroot#warnings_errors_and_tracing
+          # avoid bug in git diff invocation
+          NO_REFRESH_CHECK: 1
+          NO_SHFMT_CHECK: 1
 
       - name: Store packages
         uses: actions/upload-artifact@v4
